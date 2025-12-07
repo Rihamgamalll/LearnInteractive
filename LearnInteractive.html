@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة التعليم التفاعلي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #1e293b;
+            --light-bg: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: var(--white);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Courses Section */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--white);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .course-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .course-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .course-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .course-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--white);
+            padding: 5rem 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            background: var(--light-bg);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background: var(--light-bg);
+            color: var(--text-primary);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-size: 2rem;
+        }
+
+        .modal-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            z-index: 9999;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <header>
+        <nav>
+            <div class="logo">🎓 منصة التعليم</div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#courses">الدورات</a></li>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#about">من نحن</a></li>
+            </ul>
+            <a href="#register" class="cta-button">ابدأ التعلم الآن</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>اكتشف عالم التعلم التفاعلي</h1>
+        <p>انضم إلى آلاف الطلاب في رحلة تعليمية ممتعة ومثيرة للاهتمام</p>
+        <div class="hero-buttons">
+            <a href="#courses" class="btn-primary">استعرض الدورات</a>
+            <a href="#register" class="btn-secondary">سجل الآن مجاناً</a>
+        </div>
+    </section>
+
+    <section class="container" id="courses">
+        <h2 class="section-title">الدورات المتاحة</h2>
+        <div class="courses-grid">
+            <div class="course-card" onclick="openModal('web-development')">
+                <div class="course-icon">💻</div>
+                <h3>تطوير الويب</h3>
+                <p>تعلم تطوير المواقع والتطبيقات باستخدام أحدث التقنيات والأدوات الحديثة</p>
+                <button class="course-btn">ابدأ التعلم</button>
+            </div>
+
+            <div class="course-card" onclick="openModal('ui-ux-design')">
+                <div class="course-icon">🎨</div>
+                <h3>تصميم UI/UX</h3>
+                <p>أتقن فن تصميم واجهات المستخدم وتجربة المستخدم مع أفضل الممارسات</p>
+                <button class="course-btn">ابدأ التعلم</button>
+            </div>
+
+            <div class="course-card" onclick="openModal('data-science')">
+                <div class="course-icon">📊</div>
+                <h3>علوم البيانات</h3>
+                <p>اكتشف عالم البيانات والتحليلات والذكاء الاصطناعي من الصفر</p>
+                <button class="course-btn">ابدأ التعلم</button>
+            </div>
+
+            <div class="course-card" onclick="openModal('mobile-development')">
+                <div class="course-icon">📱</div>
+                <h3>تطوير التطبيقات</h3>
+                <p>أنشئ تطبيقات الهواتف المحمولة لنظامي iOS و Android</p>
+                <button class="course-btn">ابدأ التعلم</button>
+            </div>
+
+            <div class="course-card" onclick="openModal('programming')">
+                <div class="course-icon">⚡</div>
+                <h3>البرمجة</h3>
+                <p>تعلم أساسيات البرمجة ولغات البرمجة المختلفة من البداية</p>
+                <button class="course-btn">ابدأ التعلم</button>
+            </div>
+
+            <div class="course-card" onclick="openModal('graphic-design')">
+                <div class="course-icon">✨</div>
+                <h3>التصميم الجرافيكي</h3>
+                <p>طور مهاراتك في التصميم والإبداع البصري باستخدام أدوات احترافية</p>
+                <button class="course-btn">ابدأ التعلم</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--text-primary);">لماذا تختارنا؟</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🎯</div>
+                    <h3>تعلم تفاعلي</h3>
+                    <p>دورات تفاعلية مع مشاريع عملية لتطبيق ما تتعلمه</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>مدربون محترفون</h3>
+                    <p>تعلم من أفضل الخبراء في مجالاتهم مع سنوات من الخبرة</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📚</div>
+                    <h3>محتوى شامل</h3>
+                    <p>مكتبة واسعة من الدورات والدروس المنظمة بشكل احترافي</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏆</div>
+                    <h3>شهادات معتمدة</h3>
+                    <p>احصل على شهادات إتمام معتمدة لإظهار مهاراتك</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💬</div>
+                    <h3>دعم مستمر</h3>
+                    <p>فريق دعم متاح على مدار الساعة لمساعدتك في رحلتك</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>متوافق مع جميع الأجهزة</h3>
+                    <p>تعلم من أي جهاز، في أي وقت، وفي أي مكان</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="courseModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">عنوان الدورة</h2>
+            <div id="modalContent">
+                <p>محتوى الدورة سيظهر هنا...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Course Data
+        const courses = {
+            'web-development': {
+                title: 'تطوير الويب الكامل',
+                content: `
+                    <p><strong>وصف الدورة:</strong></p>
+                    <p>دورة شاملة لتعلم تطوير الويب من الصفر حتى الاحتراف. سوف تتعلم:</p>
+                    <ul style="margin: 1rem 0; padding-right: 2rem; color: var(--text-secondary);">
+                        <li>HTML و CSS للمبتدئين</li>
+                        <li>JavaScript و jQuery</li>
+                        <li>React و Vue.js</li>
+                        <li>Node.js و Express</li>
+                        <li>قواعد البيانات (MySQL, MongoDB)</li>
+                        <li>نشر المواقع على السحابة</li>
+                    </ul>
+                    <p><strong>المدة:</strong> 12 أسبوع</p>
+                    <p><strong>المستوى:</strong> مبتدئ إلى متقدم</p>
+                    <p><strong>السعر:</strong> مجاناً للبدء</p>
+                `
+            },
+            'ui-ux-design': {
+                title: 'تصميم UI/UX الاحترافي',
+                content: `
+                    <p><strong>وصف الدورة:</strong></p>
+                    <p>أتقن فن تصميم واجهات المستخدم وتجربة المستخدم مع أفضل الممارسات والمنهجيات:</p>
+                    <ul style="margin: 1rem 0; padding-right: 2rem; color: var(--text-secondary);">
+                        <li>مبادئ التصميم الأساسية</li>
+                        <li>بحث المستخدم (User Research)</li>
+                        <li>إنشاء Wireframes و Prototypes</li>
+                        <li>أدوات التصميم (Figma, Adobe XD)</li>
+                        <li>اختبار قابلية الاستخدام</li>
+                        <li>تصميم متجاوب (Responsive Design)</li>
+                    </ul>
+                    <p><strong>المدة:</strong> 10 أسابيع</p>
+                    <p><strong>المستوى:</strong> مبتدئ إلى متوسط</p>
+                    <p><strong>السعر:</strong> مجاناً للبدء</p>
+                `
+            },
+            'data-science': {
+                title: 'علوم البيانات والذكاء الاصطناعي',
+                content: `
+                    <p><strong>وصف الدورة:</strong></p>
+                    <p>اكتشف عالم البيانات والتحليلات المتقدمة:</p>
+                    <ul style="margin: 1rem 0; padding-right: 2rem; color: var(--text-secondary);">
+                        <li>Python للبيانات</li>
+                        <li>تحليل البيانات (Pandas, NumPy)</li>
+                        <li>التصور البياني (Matplotlib, Seaborn)</li>
+                        <li>تعلم الآلة (Machine Learning)</li>
+                        <li>الشبكات العصبية</li>
+                        <li>مشاريع عملية</li>
+                    </ul>
+                    <p><strong>المدة:</strong> 16 أسبوع</p>
+                    <p><strong>المستوى:</strong> متوسط إلى متقدم</p>
+                    <p><strong>السعر:</strong> مجاناً للبدء</p>
+                `
+            },
+            'mobile-development': {
+                title: 'تطوير تطبيقات الهواتف',
+                content: `
+                    <p><strong>وصف الدورة:</strong></p>
+                    <p>أنشئ تطبيقات احترافية للهواتف الذكية:</p>
+                    <ul style="margin: 1rem 0; padding-right: 2rem; color: var(--text-secondary);">
+                        <li>React Native</li>
+                        <li>Flutter</li>
+                        <li>iOS Development (Swift)</li>
+                        <li>Android Development (Kotlin)</li>
+                        <li>واجهات المستخدم المتنقلة</li>
+                        <li>نشر التطبيقات</li>
+                    </ul>
+                    <p><strong>المدة:</strong> 14 أسبوع</p>
+                    <p><strong>المستوى:</strong> مبتدئ إلى متقدم</p>
+                    <p><strong>السعر:</strong> مجاناً للبدء</p>
+                `
+            },
+            'programming': {
+                title: 'أساسيات البرمجة',
+                content: `
+                    <p><strong>وصف الدورة:</strong></p>
+                    <p>ابدأ رحلتك في عالم البرمجة:</p>
+                    <ul style="margin: 1rem 0; padding-right: 2rem; color: var(--text-secondary);">
+                        <li>مفاهيم البرمجة الأساسية</li>
+                        <li>الخوارزميات وهياكل البيانات</li>
+                        <li>Python للمبتدئين</li>
+                        <li>Java و C++</li>
+                        <li>حل المشاكل البرمجية</li>
+                        <li>مشاريع عملية</li>
+                    </ul>
+                    <p><strong>المدة:</strong> 8 أسابيع</p>
+                    <p><strong>المستوى:</strong> مبتدئ</p>
+                    <p><strong>السعر:</strong> مجاناً للبدء</p>
+                `
+            },
+            'graphic-design': {
+                title: 'التصميم الجرافيكي',
+                content: `
+                    <p><strong>وصف الدورة:</strong></p>
+                    <p>طور مهاراتك الإبداعية في التصميم:</p>
+                    <ul style="margin: 1rem 0; padding-right: 2rem; color: var(--text-secondary);">
+                        <li>مبادئ التصميم والألوان</li>
+                        <li>Adobe Photoshop</li>
+                        <li>Adobe Illustrator</li>
+                        <li>التصميم الرقمي</li>
+                        <li>التصميم للطباعة</li>
+                        <li>بناء Portfolio</li>
+                    </ul>
+                    <p><strong>المدة:</strong> 10 أسابيع</p>
+                    <p><strong>المستوى:</strong> مبتدئ إلى متوسط</p>
+                    <p><strong>السعر:</strong> مجاناً للبدء</p>
+                `
+            }
+        };
+
+        // Modal Functions
+        function openModal(courseId) {
+            const modal = document.getElementById('courseModal');
+            const course = courses[courseId];
+            
+            if (course) {
+                document.getElementById('modalTitle').textContent = course.title;
+                document.getElementById('modalContent').innerHTML = course.content;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('courseModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('courseModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.course-card, .feature-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effect to cards
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
+
